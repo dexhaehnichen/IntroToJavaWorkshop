@@ -18,17 +18,17 @@ import javax.swing.SwingUtilities;
 public class ScaryMaze extends JPanel implements Runnable, MouseMotionListener {
 	
 	BufferedImage maze;
-	final int frameWidth = 600;
-	final int frameHeight = 400;
+	final int frameWidth = 800;
+	final int frameHeight = 600;
 
 	ScaryMaze() throws Exception {
 		//1. Use this online tool to make a maze image and drop it into your day5 package: http://pixlr.com/editor/
-		maze = ImageIO.read(getClass().getResource("maze.png"));
+		maze = ImageIO.read(getClass().getResource("maze.jpg"));
 		//2. set the mouse pointer to the start of your maze using:
-		//new Robot().mouseMove(xPosition, yPosition)
+		new Robot().mouseMove(40, 590);
 		
 		//3. add a mouse motion listener using:
-		//addMouseMotionListener(this)
+		addMouseMotionListener(this);
 		
 	}
 
@@ -38,28 +38,39 @@ public class ScaryMaze extends JPanel implements Runnable, MouseMotionListener {
 		int mouseY = e.getY();
 		int mouseColor = maze.getRGB(mouseX, mouseY);
 		//4. print the mouseColor variable to see what color the mouse is touching
-
+System.out.println(mouseColor);
 		//5. make a variable to hold the background color. 
-
+int backgroundColor = 1;
 		//6. if the mouse falls off the path (if it is on the background)
+		if (mouseColor == backgroundColor){
+			scare();
+		}
+		if (mouseColor == -131072) {
+			win();
+		}
+	}
+	private void win() {
+		System.out.println("YUO WIN!");
+		//7. find a scary sound and put it in the day5 package where you put your maze picture. You can find a sound on freesound.org. Log in as leagueofamazing/code4life.
+		AudioClip sound = JApplet.newAudioClip(getClass().getResource("yw.mp3"));
 		
-				// call the scare method
+		//8. play the scary sound. Hint: type "sound" and then a period.
+		sound.play();
 		
-		//10. if the mouse is on the end color
-				
-				// pop up a message to tell them they won
-		
+		//9. drop an image into your day5 package, and use the showScaryImage method to scare your victim!
+showScaryImage("YouWin.png");
 	}
 
 	private void scare() {
 		System.out.println("BOO!");
 		//7. find a scary sound and put it in the day5 package where you put your maze picture. You can find a sound on freesound.org. Log in as leagueofamazing/code4life.
-		//AudioClip sound = JApplet.newAudioClip(getClass().getResource("scream.wav"));
+		AudioClip sound = JApplet.newAudioClip(getClass().getResource("yl.wav"));
 		
-		//8. play the scary sound. Hint: type "sound" and then a period.		
+		//8. play the scary sound. Hint: type "sound" and then a period.
+		sound.play();
 		
 		//9. drop an image into your day5 package, and use the showScaryImage method to scare your victim!
-
+showScaryImage("yl2.jpeg");
 	}
 
 	private void showScaryImage(String imageName) {
